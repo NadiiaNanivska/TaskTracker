@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskController {
     private final TaskService taskService;
 
@@ -24,8 +25,8 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public List<Task> getAllTasks() {
-        return  taskService.getAllTasks();
+    public List<Task> getAllTasks(@RequestParam(required = false) String status) {
+        return  taskService.getAllTasks(status);
     }
 
     @DeleteMapping("/tasks/{id}")

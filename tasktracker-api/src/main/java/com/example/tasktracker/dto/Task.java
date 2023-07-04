@@ -1,15 +1,23 @@
 package com.example.tasktracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Task {
     private long id;
-    private String firstName;
-    private String lastName;
-    private String emailId;
+    private String title;
+    private String description;
+    private String status;
+    private LocalDateTime createdAt;
+
+    public Task(long id, String title, String description, LocalDateTime createdAt) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
 }
