@@ -23,8 +23,8 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task createTask(Task task) {
         TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setCreatedAt(LocalDateTime.now());
         BeanUtils.copyProperties(task, taskEntity);
+        taskEntity.setCreatedAt(LocalDateTime.now());
         taskRepository.save(taskEntity);
         return task;
     }
