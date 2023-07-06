@@ -43,6 +43,7 @@ public class TaskServiceImpl implements TaskService {
                         emp.getId(),
                         emp.getTitle(),
                         emp.getDescription(),
+                        emp.getStatus(),
                         emp.getCreatedAt()))
                 .collect(Collectors.toList());
         return tasks;
