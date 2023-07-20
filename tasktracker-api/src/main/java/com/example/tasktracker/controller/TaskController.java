@@ -51,5 +51,4 @@ public class TaskController {
         task = taskService.updateTask(id, task);
         return ResponseEntity.ok(task);
     }
-
 }
