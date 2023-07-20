@@ -1,5 +1,6 @@
 package com.example.tasktracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class EventEntity {
     private long id;
     private String type;
     private LocalDate date;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
     private String content;
 }
