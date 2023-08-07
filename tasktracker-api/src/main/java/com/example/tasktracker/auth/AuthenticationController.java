@@ -25,4 +25,12 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(service.authenticate(request));
     }
+
+    @PatchMapping("/change-password/{userId}")
+    public ResponseEntity<Object> changePassword(@PathVariable Integer userId,
+            @RequestBody ChangePasswordRequest request
+    ) {
+        service.changePassword(userId, request);
+        return ResponseEntity.ok("Success");
+    }
 }

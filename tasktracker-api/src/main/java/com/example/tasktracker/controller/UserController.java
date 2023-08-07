@@ -13,7 +13,7 @@ public class UserController {
     public UserController(UserService userService){this.userService = userService; }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserEntity> getTaskById(@PathVariable Integer id) {
+    public ResponseEntity<UserEntity> getUserById(@PathVariable Integer id) {
         UserEntity user = null;
         user = userService.getUserById(id);
         return ResponseEntity.ok(user);

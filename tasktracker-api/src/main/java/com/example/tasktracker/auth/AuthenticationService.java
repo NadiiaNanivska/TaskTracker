@@ -38,7 +38,6 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        System.out.println(request.getEmail());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -54,5 +53,18 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .userId(id)
                 .build();
+    }
+
+    public void changePassword(Integer userId, ChangePasswordRequest request) {
+        var user = repository.findById(userId)
+                .orElseThrow();
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+
+        String encodedNewPassword = passwordEncoder.encode(request.getNewPassword());
+        user.setPassword(encodedNewPassword);
+        repository.save(user);
     }
 }
