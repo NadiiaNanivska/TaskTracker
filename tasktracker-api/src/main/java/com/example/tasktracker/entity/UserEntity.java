@@ -29,6 +29,7 @@ public class UserEntity implements UserDetails{
     private String password;
     private String repeatPassword;
     private String phone;
+    private String photo;
 
     @Enumerated(EnumType.STRING)
     private Role role;

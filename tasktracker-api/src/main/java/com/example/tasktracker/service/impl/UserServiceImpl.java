@@ -1,5 +1,7 @@
 package com.example.tasktracker.service.impl;
 
+import com.example.tasktracker.dto.user.ChangePhotoRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.tasktracker.entity.UserEntity;
@@ -40,5 +42,13 @@ public class UserServiceImpl implements UserService {
         userEntity.setRole(user.getRole());
         userRepository.save(userEntity);
         return user;
+    }
+
+    @Override
+    public UserEntity updateUserPhoto(Integer id, ChangePhotoRequest request) {
+        UserEntity userEntity = userRepository.findById(id).get();
+        userEntity.setPhoto(request.getPhoto());
+        userRepository.save(userEntity);
+        return userEntity;
     }
 }
