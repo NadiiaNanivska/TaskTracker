@@ -51,4 +51,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
         return userEntity;
     }
+
+    @Override
+    public UserEntity deleteUserPhoto(Integer id) {
+        UserEntity userEntity = userRepository.findById(id).get();
+        userEntity.setPhoto(null);
+        userRepository.save(userEntity);
+        return userEntity;
+    }
 }

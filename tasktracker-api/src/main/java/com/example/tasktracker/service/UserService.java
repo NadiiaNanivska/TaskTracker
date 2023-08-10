@@ -8,4 +8,5 @@ public interface UserService {
     UserEntity getUserById(Integer id);
     UserEntity updateUser(Integer id, UserEntity user);
     UserEntity updateUserPhoto(Integer id, ChangePhotoRequest request);
+    UserEntity deleteUserPhoto(Integer id);
 }

@@ -32,4 +32,10 @@ public class UserController {
         UserEntity user = userService.updateUserPhoto(id, request);
         return ResponseEntity.ok(user);
     }
+
+    @DeleteMapping("/users/photo/{id}")
+    public ResponseEntity<UserEntity> deletePhoto(@PathVariable Integer id) {
+        UserEntity user = userService.deleteUserPhoto(id);
+        return ResponseEntity.ok(user);
+    }
 }
