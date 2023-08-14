@@ -18,12 +18,4 @@ public class Event {
     private LocalTime time;
     private String content;
     private Integer userId;
-
-//    public Event(long id, String type, LocalDate date, LocalTime time, String content) {
-//        this.id = id;
-//        this.type = type;
-//        this.date = date;
-//        this.time = time;
-//        this.content = content;
-//    }
 }

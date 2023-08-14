@@ -16,12 +16,4 @@ public class Task {
     private String status;
     private LocalDateTime createdAt;
     private Integer userId;
-
-//    public Task(long id, String title, String description, String status, LocalDateTime createdAt) {
-//        this.id = id;
-//        this.title = title;
-//        this.status = status;
-//        this.description = description;
-//        this.createdAt = createdAt;
-//    }
 }

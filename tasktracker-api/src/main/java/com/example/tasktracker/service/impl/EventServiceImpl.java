@@ -27,6 +27,7 @@ public class EventServiceImpl implements EventService {
         BeanUtils.copyProperties(event, eventEntity);
         eventEntity.setUser(userService.getUserById(event.getUserId()));
         eventRepository.save(eventEntity);
+        event.setId(eventEntity.getId());
         return event;
     }
 
