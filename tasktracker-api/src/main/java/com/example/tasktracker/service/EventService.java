@@ -4,9 +4,10 @@ import com.example.tasktracker.dto.Event;
 import java.util.List;
 
 public interface EventService {
+
     Event createEvent(Event event);
 
-    List<Event> getAllEvents(String type);
+    List<Event> getAllEvents(String type, Integer userId);
 
     boolean deleteEvent(Long id);
 

@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-    TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
+    private final UserServiceImpl userService;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserServiceImpl userService) {
         this.taskRepository = taskRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -25,17 +27,18 @@ public class TaskServiceImpl implements TaskService {
         TaskEntity taskEntity = new TaskEntity();
         BeanUtils.copyProperties(task, taskEntity);
         taskEntity.setCreatedAt(LocalDateTime.now());
+        taskEntity.setUser(userService.getUserById(task.getUserId()));
         taskRepository.save(taskEntity);
         return task;
     }
 
     @Override
-    public List<Task> getAllTasks(String status) {
+    public List<Task> getAllTasks(String status, Integer userId) {
         List<TaskEntity> taskEntities = new ArrayList<>();
         if (status != null && !status.isEmpty()) {
-            taskEntities = taskRepository.findByStatus(status);
+            taskEntities = taskRepository.findByStatusAndUser(status, userService.getUserById(userId));
         } else {
-            taskEntities = taskRepository.findAll();
+            taskEntities = taskRepository.findAllByUser(userService.getUserById(userId));
         }
         List<Task> tasks = taskEntities
                 .stream()
@@ -44,7 +47,8 @@ public class TaskServiceImpl implements TaskService {
                         emp.getTitle(),
                         emp.getDescription(),
                         emp.getStatus(),
-                        emp.getCreatedAt()))
+                        emp.getCreatedAt(),
+                        emp.getUser().getId()))
                 .collect(Collectors.toList());
         return tasks;
     }

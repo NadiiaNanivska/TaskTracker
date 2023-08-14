@@ -1,11 +1,11 @@
 package com.example.tasktracker.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -17,7 +17,11 @@ public class EventEntity {
     private long id;
     private String type;
     private LocalDate date;
-    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private UserEntity user;
 }

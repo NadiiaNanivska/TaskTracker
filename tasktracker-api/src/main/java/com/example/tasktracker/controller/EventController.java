@@ -21,9 +21,9 @@ public class EventController {
         return eventService.createEvent(event);
     }
 
-    @GetMapping("/events")
-    public List<Event> getAllEvents(@RequestParam(required = false) String type) {
-        return eventService.getAllEvents(type);
+    @GetMapping("{userId}/events")
+    public List<Event> getAllEvents(@RequestParam(required = false) String type, @PathVariable Integer userId) {
+        return eventService.getAllEvents(type, userId);
     }
 
     @DeleteMapping("/events/{id}")

@@ -13,25 +13,30 @@ import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
+    private final UserServiceImpl userService;
 
-    public EventServiceImpl(EventRepository eventRepository){this.eventRepository = eventRepository;}
+    public EventServiceImpl(EventRepository eventRepository, UserServiceImpl userService) {
+        this.eventRepository = eventRepository;
+        this.userService = userService;
+    }
 
     @Override
     public Event createEvent(Event event) {
         EventEntity eventEntity = new EventEntity();
         BeanUtils.copyProperties(event, eventEntity);
+        eventEntity.setUser(userService.getUserById(event.getUserId()));
         eventRepository.save(eventEntity);
         return event;
     }
 
     @Override
-    public List<Event> getAllEvents(String type) {
+    public List<Event> getAllEvents(String type, Integer userId) {
         List<EventEntity> eventEntities = new ArrayList<>();
         if (type != null && !type.isEmpty()) {
-            eventEntities = eventRepository.findByType(type);
+            eventEntities = eventRepository.findByTypeAndUser(type, userService.getUserById(userId));
         } else {
-            eventEntities = eventRepository.findAll();
+            eventEntities = eventRepository.findAllByUser(userService.getUserById(userId));
         }
         return eventEntities
                 .stream()
@@ -40,7 +45,8 @@ public class EventServiceImpl implements EventService {
                         emp.getType(),
                         emp.getDate(),
                         emp.getTime(),
-                        emp.getContent()))
+                        emp.getContent(),
+                        emp.getUser().getId()))
                 .collect(Collectors.toList());
     }
 

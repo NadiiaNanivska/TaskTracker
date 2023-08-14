@@ -24,9 +24,9 @@ public class TaskController {
         return taskService.createTask(employee);
     }
 
-    @GetMapping("/tasks")
-    public List<Task> getAllTasks(@RequestParam(required = false) String status) {
-        return  taskService.getAllTasks(status);
+    @GetMapping("{userId}/tasks")
+    public List<Task> getAllTasks(@RequestParam(required = false) String status, @PathVariable Integer userId) {
+        return  taskService.getAllTasks(status, userId);
     }
 
     @DeleteMapping("/tasks/{id}")

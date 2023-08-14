@@ -2,6 +2,8 @@ package com.example.tasktracker.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -17,4 +19,9 @@ public class TaskEntity {
     private String status;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private UserEntity user;
 }

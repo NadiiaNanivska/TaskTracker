@@ -8,7 +8,7 @@ import java.util.List;
 public interface TaskService {
     Task createTask(Task task);
 
-    List<Task> getAllTasks(String status);
+    List<Task> getAllTasks(String status, Integer userId);
 
     boolean deleteTask(Long id);
 
